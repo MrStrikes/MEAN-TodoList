@@ -1,0 +1,77 @@
+<div class="page-header mb-3">
+    <h1>Your tasks</h1>
+</div>
+<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#exampleModal">
+    Add new task
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add a task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="login" ng-submit="task.addTask(taskDatas);">
+                    <div class="form-group">
+                        <label for="taskname">Task Name</label>
+                        <input type="text" class="form-control" id="taskname" placeholder="Enter Task Name" name="taskname" ng-model="task.taskDatas.taskName">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskname">Task Description</label>
+                        <input type="text" class="form-control" id="taskdesc" placeholder="Enter Task Description" name="taskdesc" ng-model="task.taskDatas.taskDescription">
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="done" value="done" name="task" class="custom-control-input" ng-model="task.taskDatas.taskStatus">
+                            <label class="custom-control-label" for="done">Task done</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                            <input type="radio" id="todo" value="todo" name="task" class="custom-control-input" ng-model="task.taskDatas.taskStatus">
+                            <label class="custom-control-label" for="todo">Task to do</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="!task.allDatas">
+    <h3>No task found here mate. Add one ?</h3>
+</div>
+
+<table class="table table-bordered table-striped rounded shadow" ng-if="task.allDatas">
+    <thead>
+        <tr>
+            <th scope="col">Task Creator</th>
+            <th scope="col">Task Name</th>
+            <th scope="col">Task Description</th>
+            <th scope="col">Task Status</th>
+            <th scope="col">Task manager</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="x in task.allDatas">
+            <th scope="row">{{ x.taskCreator }}</th>
+            <td>{{ x.taskName }}</td>
+            <td>{{ x.taskDescription }}</td>
+            <td class="taskState">{{ x.taskStatus }}</td>
+            <td>
+                <div class="dropdown show text-right">
+                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manage this task
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" ng-click="task.changeTaskState(x);">Change task state</a>
+                        <a class="dropdown-item" ng-click="task.deleteTask(x._id);">Delete task</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" ng-app="Wisebatt" ng-controller="MainControl as Main" ng-show="Main.loadMe" ng-cloak>
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome.min.css">
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-route.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/routes.js"></script>
+    <script src="app/controllers/UserController.js"></script>
+    <script src="app/controllers/MainController.js"></script>
+    <script src="app/controllers/TaskController.js"></script>
+    <script src="app/services/AuthServices.js"></script>
+    <script src="app/services/TaskServices.js"></script>
+    <title>Great MEAN Tasklist</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Super dope TaskList with MEAN</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a ng-if='!Main.isLoggedIn' class="nav-link" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a ng-if='!Main.isLoggedIn' class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a ng-if='Main.isLoggedIn' class="nav-link" href="#" ng-click="Main.logout();">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a ng-if='Main.isLoggedIn' class="nav-link" href="/tasks">Show tasks</a>
+                </li>
+                <li>
+                    <a ng-if='Main.isLoggedIn' class="nav-link" href="/profile">Logged in as <span class="badge badge-secondary">{{ Main.username }}</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main role="main" class="container">
+        <div class="starter-template">
+            <h1>Base Template</h1>
+        </div>
+        <div ng-view></div>
+    </main>
+    <!-- JQuery & Bootstrap implementaion -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="assets/js/bootstrap.js"></script>
+</body>
+</html>
